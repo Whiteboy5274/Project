@@ -11,7 +11,6 @@
 
     <context:component-scan base-package="com.mmall" annotation-config="true"/>
 
-    <!--配置spring文件的时候，把里面的常量进行分离，分离到datasource.properties里面，引用里面的key,然后把value填充进去-->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="order" value="2"/>
@@ -24,7 +23,7 @@
         <property name="fileEncoding" value="utf-8"/>
     </bean>
 
-    <!--数据库用到的一个dbcp连接池，如果读到配置，直接把value自动填充上-->
+
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${db.driverClassName}"/>
         <property name="url" value="${db.url}"/>
@@ -58,7 +57,6 @@
         <property name="validationQuery" value="SELECT 1 FROM dual"/>
     </bean>
 
-    <!--bean id指的是上面那个dataSource,往sqlSessionFactory注入这个对象-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath*:mappers/*Mapper.xml"></property>
@@ -78,7 +76,6 @@
 
     </bean>
 
-    <!--扫描dao层，对service层提供dao层接口的包-->
     <bean name="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.mmall.dao"/>
     </bean>
