@@ -64,7 +64,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     //通过type知道是用户名还是邮箱，来判断调用哪个数据库进行校验
-    public ServerResponse<String> checkValid(String str, String type){//注册校验
+    public ServerResponse<String> checkValid(String str,String type){//注册校验
         //isNotBlank()   " " false
         //isNotEmpty()   " " true
         if(org.apache.commons.lang3.StringUtils.isNotBlank(type)){
@@ -89,7 +89,7 @@ public class UserServiceImpl implements IUserService {
 
     public ServerResponse selectQuestion(String username){//选择问题
 
-        ServerResponse validResponse = this.checkValid(username, Const.USERNAME);//校验用户名是否存在
+        ServerResponse validResponse = this.checkValid(username,Const.USERNAME);//校验用户名是否存在
         if(validResponse.isSuccess()){
             //用户不存在，跟上面相反，上面是用户不存在返回成功，我们这里是用户存在才返回成功
             return ServerResponse.createByErrorMessage("用户不存在");

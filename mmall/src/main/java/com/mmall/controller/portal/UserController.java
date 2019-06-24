@@ -55,10 +55,10 @@ public class UserController {
         return iUserService.register(user);
     }
 
-    @RequestMapping(value = "check_valid.do", method = RequestMethod.POST)//校验
+    @RequestMapping(value = "check_valid.do",method = RequestMethod.POST)//校验
     @ResponseBody
-    public ServerResponse<String> checkValid(String str, String type) {
-        return iUserService.checkValid(str, type);
+    public ServerResponse<String> checkValid(String str,String type){
+        return iUserService.checkValid(str,type);
     }
 
     @RequestMapping(value = "get_user_info.do", method = RequestMethod.POST)//获取用户登录信息
@@ -71,9 +71,9 @@ public class UserController {
         return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
     }
 
-    @RequestMapping(value = "forget_get_question.do", method = RequestMethod.POST)//获取问题
+    @RequestMapping(value = "forget_get_question.do",method = RequestMethod.POST)//获取问题
     @ResponseBody
-    public ServerResponse<String> forgetGetQuestion(String username) {
+    public ServerResponse<String> forgetGetQuestion(String username){
         return iUserService.selectQuestion(username);
     }
 

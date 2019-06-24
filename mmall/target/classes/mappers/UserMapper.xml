@@ -185,7 +185,6 @@
     SELECT
     count(1)
     from mmall_user
-    --     //#防止sql注入
     where username=#{username}
     and question = #{question}
     and answer = #{answer}
@@ -205,9 +204,9 @@
     and id = #{userId}
   </select>
 
+  <!--校验email时，查库里面有没有email，并且email所属的user不是当前登录的user,如果查到结果的话，就说明这个email是其他人已经占用的，所以email已经占用，count>0，说明email已经存在，无法更新-->
   <select id="checkEmailByUserId" resultType="int" parameterType="map">
     select count(1) from mmall_user
-      --校验email时，查库里面有没有email，并且email所属的user不是当前登录的user,如果查到结果的话，就说明这个email是其他人已经占用的，所以email已经占用，count>0，说明email已经存在，无法更新
     where email = #{email}
     and id != #{userId}
   </select>
