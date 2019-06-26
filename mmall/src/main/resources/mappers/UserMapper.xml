@@ -159,6 +159,12 @@
     where username = #{username}
   </select>
 
+  <select id="checkEmail" resultType="int" parameterType="string" >
+    select count(1) from mmall_user
+    where email = #{email}
+  </select>
+
+
   <select id="selectLogin" resultMap="BaseResultMap" parameterType="map">
     SELECT
     --     *???//这样真的好么?答案就是,这样不好.
@@ -168,10 +174,6 @@
     and password = #{password}
   </select>
 
-  <select id="checkEmail" resultType="int" parameterType="string" >
-    select count(1) from mmall_user
-    where email = #{email}
-  </select>
 
   <select id="selectQuestionByUsername" resultType="string" parameterType="string">
     select

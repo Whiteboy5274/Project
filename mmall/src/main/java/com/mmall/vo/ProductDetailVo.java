@@ -7,7 +7,9 @@ import java.math.BigDecimal;
  */
 public class ProductDetailVo {
 
-    private Integer id;
+
+
+    private Integer  id;
     private Integer categoryId;
     private String name;
     private String subtitle;
@@ -19,6 +21,7 @@ public class ProductDetailVo {
     private Integer status;
     private String createTime;
     private String updateTime;
+
 
     private String imageHost;//图片服务器url的前缀，通过前缀，我们再拼上图片的地址，就把这个产品的vo对象里面的图片转出来了
     private Integer parentCategoryId;

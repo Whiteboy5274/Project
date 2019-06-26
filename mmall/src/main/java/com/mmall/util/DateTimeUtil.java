@@ -15,7 +15,7 @@ public class DateTimeUtil {
 
     //joda-time
 
-    public static final String STANDARD_FORMAT ="yyyy-MM-dd HH:mm:ss";
+    public static final String STANDARD_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 
     //str->Date
@@ -49,6 +49,7 @@ public class DateTimeUtil {
         DateTime dateTime = new DateTime(date);
         return dateTime.toString(STANDARD_FORMAT);
     }
+
 
 
 }
