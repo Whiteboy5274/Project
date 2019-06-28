@@ -31,7 +31,11 @@
     delete from mmall_shipping
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.mmall.pojo.Shipping" >
+
+  <!--默认返回值类型是int，也就是生效行数-->
+  <!--如何让这个id在insert之后立刻可以拿到他新增的主键的id，也就是mysql自动生成的主键，增加两个配置-->
+  <!--增加了这两个配置就可以自动生成主键了-->
+  <insert id="insert" parameterType="com.mmall.pojo.Shipping" useGeneratedKeys="true" keyProperty="id">
     insert into mmall_shipping (id, user_id, receiver_name, 
       receiver_phone, receiver_mobile, receiver_province, 
       receiver_city, receiver_district, receiver_address, 
@@ -176,4 +180,43 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <delete id="deleteByShippingIdUserId" parameterType="map">
+    DELETE FROM mmall_shipping
+    where id = #{shippingId}
+    and user_id = #{userId}
+  </delete>
+
+  <update id="updateByShipping" parameterType="com.mmall.pojo.Shipping">
+    update mmall_shipping
+    set
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
+      receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+      receiver_province = #{receiverProvince,jdbcType=VARCHAR},
+      receiver_city = #{receiverCity,jdbcType=VARCHAR},
+      receiver_district = #{receiverDistrict,jdbcType=VARCHAR},
+      receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      receiver_zip = #{receiverZip,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+    and user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByShippingIdUserId" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from mmall_shipping
+    WHERE  id = #{shippingId}
+    amd user_id = #{userId}
+  </select>
+
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM mmall_shipping
+    WHERE user_id = #{userId}
+  </select>
+
 </mapper>
