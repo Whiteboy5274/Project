@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mmall.dao.UserMapper" >
-  <!--这就是user对象-->
   <resultMap id="BaseResultMap" type="com.mmall.pojo.User" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -20,7 +19,7 @@
     id, username, password, email, phone, question, answer, role, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from mmall_user
     where id = #{id,jdbcType=INTEGER}
@@ -30,14 +29,14 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.mmall.pojo.User" >
-    insert into mmall_user (id, username, password, 
-      email, phone, question, 
-      answer, role, create_time, 
-      update_time)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, 
-      #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, now(),
-      now())
+    insert into mmall_user (id, username, password,
+    email, phone, question,
+    answer, role, create_time,
+    update_time)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR},
+    #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, now(),
+    now())
   </insert>
   <insert id="insertSelective" parameterType="com.mmall.pojo.User" >
     insert into mmall_user
@@ -106,7 +105,6 @@
       </if>
     </trim>
   </insert>
-  <!--选择性更新，不为空才更新-->
   <update id="updateByPrimaryKeySelective" parameterType="com.mmall.pojo.User" >
     update mmall_user
     <set >
@@ -164,9 +162,10 @@
     where email = #{email}
   </select>
 
-  <!--*???//这样真的好么?答案就是,这样不好.-->
+
   <select id="selectLogin" resultMap="BaseResultMap" parameterType="map">
     SELECT
+    --     *???//这样真的好么?答案就是,这样不好.
     <include refid="Base_Column_List" />
     from mmall_user
     where username = #{username}
