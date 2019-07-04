@@ -173,4 +173,14 @@
   <select id="selectCartProductCount" parameterType="int" resultType="int">
     SELECT IFNULL(sum(quantity),0) as count from mmall_cart where user_id = #{userId}
   </select>
+
+  <!--返回值是当前购物车对象-->
+  <!--查到购物车被勾选的数据-->
+  <select id="selectCheckedCartByUserId" parameterType="int" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM mmall_cart
+    WHERE user_id = #{userId}
+    and checked = 1
+  </select>
 </mapper>
